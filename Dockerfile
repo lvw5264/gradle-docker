@@ -1,5 +1,5 @@
 # Stage 1: Build the fat jar with Gradle
-FROM docker.io/gradle:8.5-jdk21 AS builder
+FROM docker.io/gradle:jdk26-ubi AS builder
 
 WORKDIR /app
 
@@ -15,8 +15,9 @@ RUN gradle dependencies --no-daemon --quiet
 COPY src/ src/
 RUN gradle shadowJar --no-daemon --quiet
 
-# Stage 2: Minimal JRE runtime
-FROM docker.io/eclipse-temurin:21-jre-alpine
+# Stage 2: Minimal JRE runtime with no build artifacts
+FROM docker.io/gradle:jdk26-ubi
+#FROM docker.io/eclipse-temurin:26-jre-alpine
 
 WORKDIR /app
 
@@ -24,7 +25,7 @@ WORKDIR /app
 COPY --from=builder /app/build/libs/app.jar /app/app.jar
 
 # Create non-root user
-RUN adduser -D -H appuser
+RUN useradd appuser
 USER appuser
 
 EXPOSE 8080
