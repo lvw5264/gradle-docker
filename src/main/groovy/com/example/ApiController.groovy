@@ -38,4 +38,29 @@ class ApiController {
             largestPrime: primes ? primes.last() : null
         ]
     }
+
+    @Get('/squared/{n}')
+    Map<String, Object> squared(int n) {
+        [
+            n: n,
+            result: n * n
+        ]
+    }
+
+    @Get('/cubed/{n}')
+    Map<String, Object> cubed(int n) {
+        [
+            n: n,
+            result: n * n * n
+        ]
+    }
+
+    @Get('/multiply/{i}/{j}')
+    Map<String, Object> multiply(int i, int j) {
+        [
+            i: i,
+            j: j,
+            result: i * j
+        ]
+    }
 }
