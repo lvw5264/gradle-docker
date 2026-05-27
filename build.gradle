@@ -35,6 +35,8 @@ application {
 micronaut {
     runtime 'netty'
     testRuntime 'spock'
+    // https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/#_selecting_the_micronaut_platform_version
+    version.set("4.2.1")
 }
 
 // Configure the shadow jar (fat jar)
