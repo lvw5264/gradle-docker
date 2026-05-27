@@ -16,7 +16,7 @@ COPY src/ src/
 RUN gradle shadowJar --no-daemon --quiet
 
 # Stage 2: Minimal JRE runtime with no build artifacts
-FROM docker.io/gradle:jdk26-ubi
+FROM docker.io/eclipse-temurin:26-jre-ubi10-minimal
 #FROM docker.io/eclipse-temurin:26-jre-alpine
 
 WORKDIR /app
